@@ -44,18 +44,19 @@ public class PirateShip implements Observer {
 		if (o instanceof Ship) {
 			shipLocation = ((Ship)o).getShipLocation();
 			for (int i = 0; i < 2; i++) {
-				if (shipLocation.x  < currentLocation[i].x) {
+				if (shipLocation.x  < currentLocation[i].x && oceanMap.isOcean(currentLocation[i].x-1, currentLocation[i].y )) {
 					goWest(currentLocation[i]);
+					break;
 					
-				} if (shipLocation.y > currentLocation[i].y) {
+				} else if (shipLocation.y > currentLocation[i].y && oceanMap.isOcean(currentLocation[i].x, currentLocation[i].y -1)) {
 					goSouth(currentLocation[i]);
-					
-				}  if (shipLocation.y  < currentLocation[i].y) {
+					break;
+				}  else if (shipLocation.y  < currentLocation[i].y && oceanMap.isOcean(currentLocation[i].x, currentLocation[i].y + 1)) {
 					goNorth(currentLocation[i]);
-					
-				}  if (shipLocation.x  > currentLocation[i].x) {
+					break;
+				}  else if (shipLocation.x  > currentLocation[i].x && oceanMap.isOcean(currentLocation[i].x+1, currentLocation[i].y)) {
 					goEast(currentLocation[i]);
-				
+					break;
 				}
 			}
 		}
